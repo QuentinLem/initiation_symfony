@@ -13,6 +13,9 @@ class MyFirstController extends AbstractController
     {
         return $this->render('my_first/index.html.twig', [
             'controller_name' => 'MyFirstController',
+            'path' => '',
+            'nom' => 'Quentin',
+            'age' => '18',
         ]);
     }
 }
