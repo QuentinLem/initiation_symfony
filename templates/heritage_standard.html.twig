@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Titre par défault de la page{% endblock %}</title>
+  <link rel="stylesheet" href="{{ asset('node_modules\bootstrap\dist\js\bootstrap.js') }}">
+</head>
+<body>
+  header
+  <hr>
+  <!-- Le reste du contenu -->
+  {% block body %}Contenu par défault du corps de la page{% endblock %}
+  <hr>
+  footer
+</body>
+</html>
