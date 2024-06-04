@@ -1,0 +1,12 @@
+{% extends 'templateBootstrap.html.twig' %}
+
+{% block tail_title %}Hello PersonneController!{% endblock %}
+
+{% block page_title %}Hello PersonneController!{% endblock %}
+
+{% block body %}
+{{ dump(personne) }}
+<div class="alert alert-success">
+    {{ personne.firstname }} {{ personne.name }} a {{ personne.age }} ans.
+</div>
+{% endblock %}
