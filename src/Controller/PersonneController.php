@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Authentication\RememberMe\PersistentToken;
 
 #[Route('personne')]
 class PersonneController extends AbstractController
@@ -52,6 +51,18 @@ class PersonneController extends AbstractController
 
         return $this->render('personne/detail.html.twig', [
             'personne' => $personne,
+        ]);
+    }
+
+    #[Route('/all/age/{ageMin<\d+>}/{ageMax<\d+>}', name: 'app_personne.all.age')]
+    public function getPersonnesByAgeInterval(PersistenceManagerRegistry $doctrine, $ageMin, $ageMax): Response
+    {
+        $repository = $doctrine->getRepository(Personne::class);
+        $personnes = $repository->findPersonnesByAgeInterval($ageMin, $ageMax);
+        
+
+        return $this->render('personne/index.html.twig', [
+            'personnes' => $personnes,
         ]);
     }
 
