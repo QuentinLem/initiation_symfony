@@ -13,7 +13,8 @@
             <h6 class="card-subtitle mb-2 text-body-secondary">{{ p.firstname }} {{ p.name }}</h6>
             <p class="card-text">Age : {{ p.age }}</p>
             <a href="{{ path('app_personne.detail', {id: p.id}) }}" class="card-link">Détails</a>
-            <a href="{{ path('app_personne.detail2', {id: p.id}) }}" class="card-link">Détails avec ParamConverter</a>
+            <a href="{{ path('app_personne.detail2', {id: p.id}) }}" class="card-link">ParamConv</a>
+            <a href="{{ path('app_personne.delete', {id: p.id}) }}" class="card-link">X</a>
         </div>
     </div>
 {% endfor %}
