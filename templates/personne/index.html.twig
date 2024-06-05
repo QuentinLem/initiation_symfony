@@ -5,21 +5,6 @@
 {% block page_title %}Liste des personnes : {% endblock %}
 
 {% block body %}
-<table>
-    <tr>
-        <th>Prénom</th>
-        <th>Nom</th>
-        <th>Age</th>
-    </tr>
-    {% for p in personnes %}
-    <tr>
-        <td>{{ p.firstname }}</td>
-        <td>{{ p.name }}</td>
-        <td>{{ p.age }}</td>
-    </tr>
-    {% endfor %}
-</table>
-
 <div class="row">
 {% for p in personnes %}
     <div class="card" style="width: 18rem;">
@@ -27,8 +12,8 @@
             <h5 class="card-title">Carte de membre</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">{{ p.firstname }} {{ p.name }}</h6>
             <p class="card-text">Age : {{ p.age }}</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <a href="{{ path('app_personne.detail', {id: p.id}) }}" class="card-link">Détails</a>
+            <a href="{{ path('app_personne.detail2', {id: p.id}) }}" class="card-link">Détails avec ParamConverter</a>
         </div>
     </div>
 {% endfor %}

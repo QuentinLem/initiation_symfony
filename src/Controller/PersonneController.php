@@ -22,6 +22,37 @@ class PersonneController extends AbstractController
         ]);
     }
 
+    #[Route('/{id<\d+>}', name: 'app_personne.detail')]
+    public function detail(PersistenceManagerRegistry $doctrine, $id): Response
+    {
+        $repository = $doctrine->getRepository(Personne::class);
+        $personne = $repository->find($id);
+
+        if(!$personne){
+            $this->addFlash('error', "La personne d'id $id n'existe pas.");
+            return $this->redirectToRoute('app_personne.list');
+        }
+
+        return $this->render('personne/detail.html.twig', [
+            'personne' => $personne,
+        ]);
+    }
+
+    // meme chose que detail() mais avec conversion automatique des parametres (Param Convertor)
+    // route accessible via lien 2 sur card personne
+    #[Route('/detail/{id<\d+>}', name: 'app_personne.detail2')]
+    public function detail2(Personne $personne = null): Response
+    {
+        if(!$personne){
+            $this->addFlash('error', "La personne n'existe pas.");
+            return $this->redirectToRoute('app_personne.list');
+        }
+
+        return $this->render('personne/detail.html.twig', [
+            'personne' => $personne,
+        ]);
+    }
+
     #[Route('/add', name: 'app_personne.add')]
     public function addPersonne(PersistenceManagerRegistry $doctrine): Response
     {

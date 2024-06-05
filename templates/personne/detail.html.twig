@@ -2,10 +2,9 @@
 
 {% block tail_title %}Hello PersonneController!{% endblock %}
 
-{% block page_title %}Hello PersonneController!{% endblock %}
+{% block page_title %} {{ personne.firstname }} {{ personne.name }} {% endblock %}
 
 {% block body %}
-{{ dump(personne) }}
 <div class="alert alert-success">
     {{ personne.firstname }} {{ personne.name }} a {{ personne.age }} ans.
 </div>
