@@ -58,10 +58,16 @@ class PersonneController extends AbstractController
     public function getAll(PersistenceManagerRegistry $doctrine, $page, $nbElem): Response
     {
         $repository = $doctrine->getRepository(Personne::class);
+        $nbPersonne = $repository->count([]);
+        $nbPage = ceil($nbPersonne/$nbElem);
         $personnes = $repository->findBy([], [], $nbElem, ($page-1)*$nbElem);
 
         return $this->render('personne/index.html.twig', [
             'personnes' => $personnes,
+            'isPaginated' => true,
+            'nbPage' => $nbPage,
+            'currentPage' => $page,
+            'nbElem' => $nbElem,
         ]);
     }
 

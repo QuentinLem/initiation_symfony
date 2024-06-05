@@ -18,4 +18,20 @@
     </div>
 {% endfor %}
 </div>
+{% if isPaginated|default %}
+    <nav aria-label="mt-2 Page navigation example">
+    <ul class="pagination">
+        {% if currentPage != 1 %}
+            <li class="page-item"><a class="page-link" href="{{path('app_personne.all', {page:currentPage-1, nbElem:nbElem})}}">Previous</a></li>
+        {% endif %}
+
+        {% for i in range(1, nbPage) %}
+            <li class="page-item {%if i == currentPage %}active{% endif %}"><a class="page-link" href="{{path('app_personne.all', {page:i, nbElem:nbElem})}}">{{ i }}</a></li>
+        {% endfor %}
+        {% if currentPage != nbPage %}
+            <li class="page-item"><a class="page-link" href="{{path('app_personne.all', {page:currentPage+1, nbElem:nbElem})}}">Previous</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
 {% endblock %}
