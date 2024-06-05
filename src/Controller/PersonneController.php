@@ -53,6 +53,18 @@ class PersonneController extends AbstractController
         ]);
     }
 
+    // pagination à l'aide de findBy()
+    #[Route('/all/{page<\d+>?2}/{nbElem<\d+>?12}', name: 'app_personne.all')]
+    public function getAll(PersistenceManagerRegistry $doctrine, $page, $nbElem): Response
+    {
+        $repository = $doctrine->getRepository(Personne::class);
+        $personnes = $repository->findBy([], [], $nbElem, ($page-1)*$nbElem);
+
+        return $this->render('personne/index.html.twig', [
+            'personnes' => $personnes,
+        ]);
+    }
+
     #[Route('/add', name: 'app_personne.add')]
     public function addPersonne(PersistenceManagerRegistry $doctrine): Response
     {
