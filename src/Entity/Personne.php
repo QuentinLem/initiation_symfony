@@ -26,6 +26,9 @@ class Personne
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $job = null;
 
+    #[ORM\OneToOne(inversedBy: 'personne', cascade: ['persist', 'remove'])]
+    private ?Profile $profile = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Personne
     public function setJob(?string $job): static
     {
         $this->job = $job;
+
+        return $this;
+    }
+
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(?Profile $profile): static
+    {
+        $this->profile = $profile;
 
         return $this;
     }
