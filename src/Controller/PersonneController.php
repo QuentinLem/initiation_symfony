@@ -66,6 +66,20 @@ class PersonneController extends AbstractController
         ]);
     }
 
+    #[Route('/stats/age/{ageMin<\d+>}/{ageMax<\d+>}', name: 'app_personne.stats.age')]
+    public function getStatsOnPersonnesByAgeInterval(PersistenceManagerRegistry $doctrine, $ageMin, $ageMax): Response
+    {
+        $repository = $doctrine->getRepository(Personne::class);
+        $stats = $repository->getStatsOnPersonnesByAgeInterval($ageMin, $ageMax);
+        
+
+        return $this->render('personne/statsByAge.html.twig', [
+            'stats' => $stats[0],
+            'ageMin' => $ageMin,
+            'ageMax' => $ageMax,
+        ]);
+    }
+
     // pagination à l'aide de findBy()
     #[Route('/all/{page<\d+>?1}/{nbElem<\d+>?12}', name: 'app_personne.all')]
     public function getAll(PersistenceManagerRegistry $doctrine, $page, $nbElem): Response

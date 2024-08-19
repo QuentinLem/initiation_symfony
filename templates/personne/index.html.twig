@@ -19,7 +19,7 @@
     </div>
 {% endfor %}
 </div>
-{% if isPaginated|default %}
+{% if isPaginated|default %} <!-- or: if isPaginated is defined and isPaginated -->
     <nav aria-label="mt-2 Page navigation example">
     <ul class="pagination">
         {% if currentPage != 1 %}
